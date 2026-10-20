@@ -1,45 +1,15 @@
 /**
- * LLM 集成层 - 基于 z-ai-web-dev-sdk
- * 提供对话补全、网络搜索、网页阅读能力
+ * Provider-neutral LLM, search, and page-reading tools over MCP Streamable HTTP.
+ * The configured MCP server must expose the tool names and input contracts
+ * documented in README.md.
  */
-import ZAI from 'z-ai-web-dev-sdk';
+import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
 
-let zaiInstance: ZAI | null = null;
-
-export async function getZAI(): Promise<ZAI> {
-  if (!zaiInstance) {
-    zaiInstance = await ZAI.create();
-  }
-  return zaiInstance;
-}
+let clientPromise: Promise<Client> | null = null;
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
   content: string;
-}
-
-export async function chat(
-  messages: ChatMessage[],
-  options?: { model?: string; temperature?: number }
-): Promise<string> {
-  try {
-    const zai = await getZAI();
-    const res = await zai.chat.completions.create({
-      messages,
-      model: options?.model,
-      temperature: options?.temperature ?? 0.7,
-      stream: false,
-    } as any);
-    // 兼容不同返回结构
-    const content =
-      res?.choices?.[0]?.message?.content ??
-      res?.message?.content ??
-      res?.content ??
-      (typeof res === 'string' ? res : JSON.stringify(res));
-    return content;
-  } catch (e) {
-    return `[LLM调用失败: ${(e as Error).message}]`;
-  }
 }
 
 export interface SearchResult {
@@ -49,17 +19,6 @@ export interface SearchResult {
   host_name: string;
 }
 
-export async function webSearch(query: string, num = 5): Promise<SearchResult[]> {
-  try {
-    const zai = await getZAI();
-    const res = await zai.functions.invoke('web_search', { query, num });
-    if (Array.isArray(res)) return res as SearchResult[];
-    return [];
-  } catch {
-    return [];
-  }
-}
-
 export interface PageContent {
   title: string;
   url: string;
@@ -67,21 +26,174 @@ export interface PageContent {
   publishedTime?: string;
 }
 
+function requiredEnv(name: string): string {
+  const value = process.env[name]?.trim();
+  if (!value) throw new Error(`${name} must be configured to connect the MCP server`);
+  return value;
+}
+
+async function getMcpClient(): Promise<Client> {
+  if (!clientPromise) {
+    clientPromise = (async () => {
+      const endpoint = new URL(requiredEnv('MCP_SERVER_URL'));
+      const token = process.env.MCP_AUTH_TOKEN?.trim();
+      const client = new Client({ name: 'formula-arena', version: '1.0.0' });
+      const transport = new StreamableHTTPClientTransport(endpoint, {
+        requestInit: token ? { headers: { Authorization: `Bearer ${token}` } } : undefined,
+      });
+      await client.connect(transport);
+      return client;
+    })().catch((error) => {
+      clientPromise = null;
+      throw error;
+    });
+  }
+  return clientPromise;
+}
+
+function toolName(envName: string, fallback: string): string {
+  return process.env[envName]?.trim() || fallback;
+}
+
+async function callMcpTool(name: string, args: Record<string, unknown>): Promise<unknown> {
+  const client = await getMcpClient();
+  const result = await client.callTool({ name, arguments: args });
+  if (result.isError) {
+    const message = result.content
+      .filter((item) => item.type === 'text')
+      .map((item) => item.text)
+      .join('\n');
+    throw new Error(message || `MCP tool "${name}" failed`);
+  }
+
+  if (result.structuredContent) return result.structuredContent;
+
+  const text = result.content
+    .filter((item) => item.type === 'text')
+    .map((item) => item.text)
+    .join('\n')
+    .trim();
+  if (!text) return null;
+  try {
+    return JSON.parse(text) as unknown;
+  } catch {
+    return text;
+  }
+}
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function asText(value: unknown): string | null {
+  if (typeof value === 'string') return value;
+  const record = asRecord(value);
+  if (!record) return null;
+  for (const key of ['text', 'content', 'response', 'answer']) {
+    if (typeof record[key] === 'string') return record[key] as string;
+  }
+  const choices = record.choices;
+  if (Array.isArray(choices) && choices.length > 0) {
+    const first = asRecord(choices[0]);
+    const message = asRecord(first?.message);
+    if (typeof message?.content === 'string') return message.content;
+  }
+  return null;
+}
+
+function parseJsonText<T>(value: unknown): T | null {
+  if (typeof value !== 'string') return null;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return null;
+  }
+}
+
+export async function chat(
+  messages: ChatMessage[],
+  options?: { model?: string; temperature?: number },
+): Promise<string> {
+  try {
+    const response = await callMcpTool(
+      toolName('MCP_CHAT_TOOL', 'chat'),
+      {
+        messages,
+        ...(options?.model ? { model: options.model } : {}),
+        temperature: options?.temperature ?? 0.7,
+      },
+    );
+    const text = asText(response);
+    if (text !== null) return text;
+    return JSON.stringify(response);
+  } catch (error) {
+    return `[MCP调用失败: ${(error as Error).message}]`;
+  }
+}
+
+export async function webSearch(query: string, num = 5): Promise<SearchResult[]> {
+  try {
+    const response = await callMcpTool(
+      toolName('MCP_SEARCH_TOOL', 'web_search'),
+      { query, num },
+    );
+    const record = asRecord(response);
+    const results = Array.isArray(response)
+      ? response
+      : record?.results ?? record?.items;
+    if (!Array.isArray(results)) return [];
+    return results
+      .map((item) => {
+        const result = asRecord(item);
+        if (!result || typeof result.url !== 'string') return null;
+        return {
+          url: result.url,
+          name:
+            typeof result.name === 'string'
+              ? result.name
+              : typeof result.title === 'string'
+                ? result.title
+                : result.url,
+          snippet: typeof result.snippet === 'string' ? result.snippet : '',
+          host_name:
+            typeof result.host_name === 'string'
+              ? result.host_name
+              : (() => {
+                  try {
+                    return new URL(result.url as string).hostname;
+                  } catch {
+                    return '';
+                  }
+                })(),
+        } satisfies SearchResult;
+      })
+      .filter((item): item is SearchResult => item !== null);
+  } catch {
+    return [];
+  }
+}
+
 export async function readPage(url: string): Promise<PageContent | null> {
   try {
-    const zai = await getZAI();
-    const res = await zai.functions.invoke('page_reader', { url });
-    if (res?.data?.html) {
-      // 简单的 HTML -> text
-      const text = htmlToText(res.data.html).slice(0, 6000);
-      return {
-        title: res.data.title ?? url,
-        url: res.data.url,
-        content: text,
-        publishedTime: res.data.publishedTime,
-      };
-    }
-    return null;
+    const response = await callMcpTool(
+      toolName('MCP_READ_PAGE_TOOL', 'page_reader'),
+      { url },
+    );
+    const record = asRecord(response) ?? asRecord(parseJsonText(response));
+    const content = asText(record?.content) ?? asText(response);
+    if (!content) return null;
+    return {
+      title: typeof record?.title === 'string' ? record.title : url,
+      url: typeof record?.url === 'string' ? record.url : url,
+      content: /<\/?(?:html|body|main|article|p|div)\b/i.test(content)
+        ? htmlToText(content).slice(0, 6000)
+        : content.slice(0, 6000),
+      ...(typeof record?.publishedTime === 'string'
+        ? { publishedTime: record.publishedTime }
+        : {}),
+    };
   } catch {
     return null;
   }
@@ -104,7 +216,6 @@ function htmlToText(html: string): string {
 
 // 从 LLM 输出中提取公式 (寻找 y = ... 或 formula: ... 等模式)
 export function extractFormulaFromText(text: string): string | null {
-  // 尝试多种模式
   const patterns = [
     /```(?:math|formula|python)?\s*\n?\s*(y\s*=\s*[^\n`]+)\n?\s*```/i,
     /```(?:math|formula|python)?\s*\n?\s*([^\n`=]+(?:\+|\-|\*|\/|\^)[^\n`]+)\n?\s*```/i,
@@ -113,15 +224,13 @@ export function extractFormulaFromText(text: string): string | null {
     /formula[：:]\s*`?([^\n`]+)`?/i,
     /y\s*=\s*([^\n`]{3,200})/i,
   ];
-  for (const p of patterns) {
-    const m = text.match(p);
-    if (m) {
-      let f = (m[1] ?? m[0]).trim();
-      // 去掉前缀 y =
-      f = f.replace(/^y\s*=\s*/i, '').trim();
-      // 去掉尾部的说明文字
-      f = f.split(/[,，。；;\n]/)[0].trim();
-      if (f.length >= 2) return f;
+  for (const pattern of patterns) {
+    const match = text.match(pattern);
+    if (match) {
+      let formula = (match[1] ?? match[0]).trim();
+      formula = formula.replace(/^y\s*=\s*/i, '').trim();
+      formula = formula.split(/[,，。；;\n]/)[0].trim();
+      if (formula.length >= 2) return formula;
     }
   }
   return null;
