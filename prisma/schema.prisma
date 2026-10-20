@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ===== 竞技场核心模型 =====
+
+model Problem {
+  id             String   @id @default(cuid())
+  title          String
+  description    String
+  domain         String   // 领域: weather / turbulence / custom
+  dataUrl        String   // 数据下载链接
+  targetVar      String   // 目标变量名
+  featureVars    String   // 特征变量名 (JSON array string)
+  dataPoints     String   // 内嵌数据点 (JSON string) - 供评估使用
+  hiddenFormula  String?  // 真实公式 (发布者填写, 用于参考)
+  metrics        String   // 评估指标配置 (JSON: weights of error/interpretability)
+  status         String   @default("open") // open / closed
+  publisherName  String   @default("匿名")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  submissions    Submission[]
+  wikiPages      WikiPage[]
+  agentRuns      AgentRun[]
+  generations    MonkGeneration[]
+  experiences    ExperienceEntry[]
+}
+
+model Submission {
+  id                   String   @id @default(cuid())
+  problemId            String
+  problem              Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  submitterName        String
+  formula              String   // 提交的公式表达式
+  report               String   // 提交的报告 (markdown)
+  fittingError         Float?   // 拟合误差 (RMSE)
+  r2Score              Float?   // R²
+  maeScore             Float?   // MAE
+  interpretabilityScore Float?  // 可解释性评分 (0-100)
+  complexityScore      Float?   // 公式复杂度 (符号数)
+  overallScore         Float?   // 综合评分
+  rank                 Int?     // 排名
+  isMonk               Boolean  @default(false) // 是否为扫地僧提交
+  status               String   @default("evaluated") // pending / evaluated / failed
+  createdAt            DateTime @default(now())
+}
+
+// ===== 扫地僧记忆持久化 (Wiki) =====
+
+model WikiPage {
+  id          String   @id @default(cuid())
+  problemId   String
+  problem     Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  title       String
+  content     String   // markdown content
+  category    String   // data_exploration / deep_research / hypothesis / sr_result / evaluation / insight
+  round       Int      @default(1)
+  tags        String   @default("[]") // JSON array
+  createdAt   DateTime @default(now())
+}
+
+// ===== 扫地僧运行记录 =====
+
+model AgentRun {
+  id            String   @id @default(cuid())
+  problemId     String
+  problem       Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  round         Int      @default(1)
+  status        String   @default("pending") // pending / exploring / researching / hypothesizing / regressing / evaluating / completed / failed
+  currentStep   String   @default("")
+  stepsJson     String   @default("[]") // JSON array of step summaries
+  bestFormula   String?
+  bestError     Float?
+  startedAt     DateTime @default(now())
+  completedAt   DateTime?
+
+  steps         AgentStep[]
+}
+
+model AgentStep {
+  id          String   @id @default(cuid())
+  runId       String
+  run         AgentRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  type        String   // data_explore / deep_research / hypothesis / symbolic_regression / evaluation
+  name        String
+  input       String   @default("")
+  output      String   @default("")
+  status      String   @default("pending") // pending / running / completed / failed
+  duration    Int      @default(0) // ms
+  createdAt   DateTime @default(now())
+}
+
+// ===== 扫地僧代际进化系统 =====
+
+model MonkGeneration {
+  id            String   @id @default(cuid())
+  problemId     String
+  problem       Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  generation    Int      // 代数: 1=初代, 2=二代目, 3=三代目...
+  status        String   @default("planned") // planned / approved / running / completed / failed / skipped
+  // 上一代最佳公式 (遗传算法的"父本")
+  parentFormula  String?
+  parentError    Float?
+  parentGen      Int?
+  // 本代探索计划 (LLM 基于 wiki 经验生成)
+  planJson      String   @default("{}") // JSON: { focusAreas, hypotheses, srMethods, maxSteps, avoidPitfalls }
+  // 本代执行结果
+  bestFormula   String?
+  bestError     Float?
+  bestR2        Float?
+  bestScore     Float?
+  runId         String?  // 关联的 AgentRun id
+  // 元信息
+  autoExecute   Boolean  @default(false) // 是否自动执行 (用户可修改)
+  createdAt     DateTime @default(now())
+  approvedAt    DateTime?
+  startedAt     DateTime?
+  completedAt   DateTime?
+
+  experiences   ExperienceEntry[]
+}
+
+// ===== llm-wiki 经验记忆库 =====
+// 基于 karpathy llm-wiki 理念: 持久化、可累积、跨代复用的经验知识
+model ExperienceEntry {
+  id            String   @id @default(cuid())
+  problemId     String
+  problem       Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  generationId  String?  // 由哪一代扫地僧记录
+  generation    MonkGeneration? @relation(fields: [generationId], references: [id], onDelete: SetNull)
+  // 经验类型
+  type          String   // success / failure / insight / pitfall_avoidance / technique / contradiction
+  title         String
+  content       String   // markdown
+  // 结构化标签便于检索
+  tags          String   @default("[]") // JSON array
+  // 关联的公式 (如果有)
+  formula       String?
+  error         Float?
+  // 重要性 (0-1, 用于遗传算法选择)
+  importance    Float    @default(0.5)
+  // 是否已被后代引用
+  referencedBy  String   @default("[]") // JSON array of generation numbers
+  createdAt     DateTime @default(now())
+}
