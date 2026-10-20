@@ -1,0 +1,24 @@
+{
+  "decision": "KEEP_BASELINE",
+  "baseline_params": [
+    12.334587008855554,
+    0.3367603328975649,
+    0.847749033331863,
+    9.6171402132514
+  ],
+  "baseline_mape": 8.138045843317201,
+  "baseline_aic": -668.2984198490946,
+  "baseline_cv": 8.496628312089182,
+  "h4_mape": 7.741104671125206,
+  "h4_aic": -667.0286539118616,
+  "h4_cv": 8.249524800937365,
+  "improvements_tested": 12,
+  "best_alternative": "H4 (segmented alpha)",
+  "reason": "AIC/BIC/CV all favor baseline; H4 overfits d=3 at cost of d>=8",
+  "remaining_issues": [
+    "d=3 systematic bias (mean residual -5.17%)",
+    "2D sq series g=3 large errors (sq-2,6: 28.9%)",
+    "sq series cannot be improved by any model variant"
+  ],
+  "timestamp": "2026-10-04"
+}

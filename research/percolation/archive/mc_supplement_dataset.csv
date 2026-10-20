@@ -1,0 +1,5 @@
+name,z,d,g,pc,uncertainty,source
+(3.12.12),3,2,3,0.806976,0.000482,mc_simulation
+(4.8.8),3,2,4,0.731229,0.000741,mc_simulation
+(3.4.6.4),4,2,3,0.654853,0.002893,mc_simulation
+hcp,12,3,3,0.195716,0.003057,mc_simulation

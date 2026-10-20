@@ -1,0 +1,97 @@
+{
+  "problem_title": "油田岩心孔隙度-渗透率关系",
+  "problem_id": "porosity_permeability",
+  "domain": "petroleum",
+  "n_samples": 26,
+  "feature_vars": [
+    "phi",
+    "d_grain",
+    "S",
+    "C",
+    "phi_cubed",
+    "one_minus_phi"
+  ],
+  "target_var": "log_K",
+  "best_formula": "(-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi",
+  "best_error": 1.1893226118785816,
+  "total_time_ms": 1850,
+  "summary": "扫地僧在 3 轮中发现最佳公式: (-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi (RMSE=1.1893, R²=0.4771)",
+  "rounds": [
+    {
+      "round": 1,
+      "hypotheses_count": 6,
+      "sr_results": [
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "(-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi",
+          "rmse": 1.1893226118785816,
+          "mae": 1.1890105117925698,
+          "r2": 0.4770685383465558,
+          "complexity": 179,
+          "iterations": 8,
+          "duration_ms": 3,
+          "success": true,
+          "notes": "候选库46项, 选中29项"
+        }
+      ],
+      "best_rmse": 1.1893226118785816,
+      "best_r2": 0.4770685383465558
+    },
+    {
+      "round": 2,
+      "hypotheses_count": 6,
+      "sr_results": [
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "(-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi",
+          "rmse": 1.1893226118785816,
+          "mae": 1.1890105117925698,
+          "r2": 0.4770685383465558,
+          "complexity": 179,
+          "iterations": 8,
+          "duration_ms": 2,
+          "success": true,
+          "notes": "候选库46项, 选中29项"
+        }
+      ],
+      "best_rmse": 1.1893226118785816,
+      "best_r2": 0.4770685383465558
+    },
+    {
+      "round": 3,
+      "hypotheses_count": 6,
+      "sr_results": [
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "(-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi",
+          "rmse": 1.1893226118785816,
+          "mae": 1.1890105117925698,
+          "r2": 0.4770685383465558,
+          "complexity": 179,
+          "iterations": 8,
+          "duration_ms": 2,
+          "success": true,
+          "notes": "候选库46项, 选中29项"
+        }
+      ],
+      "best_rmse": 1.1893226118785816,
+      "best_r2": 0.4770685383465558
+    }
+  ],
+  "best_report": {
+    "formula": "(-2.742795) * phi + (-5.213572) * S + (-4.838706) * C + 3.411762 * one_minus_phi + (-5.176830) * phi^2 + 0.187792 * phi*S + (-5.614673) * phi*C + 4.189231 * phi*phi_cubed + 2.434035 * phi*one_minus_phi + 4.032687 * S^2 + (-8.541331) * S*C + (-2.574855) * S*phi_cubed + (-5.401364) * S*one_minus_phi + 5.220579 * C^2 + (-3.562809) * C*phi_cubed + 0.775967 * C*one_minus_phi + 4.424162 * phi_cubed^2 + (-4.205829) * phi_cubed*one_minus_phi + 0.138984 * log(abs(d_grain)) + (-1.554797) * sqrt(abs(S)) + (-0.563031) * log(abs(S)) + (-8.492956) * 1/S + 3.471064 * sqrt(abs(C)) + 6.037884 * log(abs(C)) + 0.546036 * 1/C + (-5.599367) * sqrt(abs(phi_cubed)) + 2.197560 * sqrt(abs(one_minus_phi)) + 1.628487 * log(abs(one_minus_phi)) + 13.505914 * 1/one_minus_phi",
+    "rmse": 1.1893226118785816,
+    "r2": 0.4770685383465558,
+    "interpretability": 10.0,
+    "overall_score": 40.165483067724466,
+    "insights": [
+      "公式复杂度为 179 个节点, 可解释性评分 10.0/100。",
+      "R² = 0.4771, 拟合质量一般, 公式可能遗漏了重要变量或非线性关系。"
+    ],
+    "recommendations": [
+      "尝试引入更多非线性项 (如平方、对数、指数变换)。",
+      "公式过于复杂, 考虑简化结构以提升可解释性。"
+    ],
+    "error_patterns": []
+  }
+}

@@ -1,0 +1,95 @@
+name,z,d,g,pc,source
+triangular,6,2,3,0.5,Sykes & Essam 1964
+honeycomb,3,2,6,0.697043,Suding & Ziff 1998; Malarz 2024
+square,4,2,4,0.592746,Ziff & Saperial 1986; Mertens & Moore 2012
+kagome,4,2,3,0.6527036,Sykes & Essam 1964
+(3^4;6),5,2,3,0.579498,Suding & Ziff 1998
+(3^3;4^2),5,2,3,0.550213,Suding & Ziff 1998
+(3;4;6;4),4,2,3,0.621819,Suding & Ziff 1998
+(4;6;12),3,2,3,0.747806,Suding & Ziff 1998
+(4;8^2),3,2,4,0.729724,Suding & Ziff 1998
+(3;12^2),3,2,3,0.807904,Suding & Ziff 1998
+diamond,4,3,6,0.4285,Galam & Mauger 1996; Lorenz & Ziff 1998
+simple cubic (sc),6,3,4,0.31161,Lorenz & Ziff 1998; Mertens & Moore 2018
+bcc,8,3,4,0.24597,Lorenz & Ziff 1998; Galam & Mauger 1996
+fcc,12,3,3,0.19923,Lorenz & Ziff 1998; Galam & Mauger 1996
+hcp,12,3,3,0.1992555,Lorenz May & Ziff 1999
+sc-1;2,18,3,3,0.1373045,Xun et al. 2021; Malarz & Galam 2004
+sc-1;2;3,26,3,3,0.0976444,Xun et al. 2021
+sc-1;2;3;4,32,3,3,0.0801171,Xun et al. 2021
+sc-1;...;5,56,3,3,0.0461815,Xun et al. 2021
+sc-1;...;6,80,3,3,0.0337049,Xun et al. 2021
+sc-1;...;7,92,3,3,0.02908,Xun et al. 2021
+sc-1;...;8,122,3,3,0.0218686,Xun et al. 2021
+sc-1;...;9,146,3,3,0.018406,Xun et al. 2021
+bcc-1;2,14,3,3,0.1759432,Xun et al. 2021
+bcc-1;2;3,26,3,3,0.0959084,Xun et al. 2021
+fcc-1;2,18,3,3,0.1361408,Xun et al. 2021
+fcc-1;2;3,42,3,3,0.0618842,Xun et al. 2021
+4D hypercubic (sc4),8,4,4,0.19688561,Mertens & Moore 2018
+5D hypercubic (sc5),10,5,4,0.14079633,Mertens & Moore 2018
+6D hypercubic (sc6),12,6,4,0.109016661,Mertens & Moore 2018
+7D hypercubic (sc7),14,7,4,0.088951121,Mertens & Moore 2018
+8D hypercubic (sc8),16,8,4,0.075210128,Mertens & Moore 2018
+9D hypercubic (sc9),18,9,4,0.0652095348,Mertens & Moore 2018
+10D hypercubic (sc10),20,10,4,0.0575929488,Mertens & Moore 2018
+11D hypercubic (sc11),22,11,4,0.0515896843,Mertens & Moore 2018
+12D hypercubic (sc12),24,12,4,0.0467309755,Mertens & Moore 2018
+13D hypercubic (sc13),26,13,4,0.0427150796,Mertens & Moore 2018
+d-Kagome-3D,6,3,3,0.3895,van der Marck 1998
+d-Kagome-4D,8,4,3,0.2715,van der Marck 1998
+d-Kagome-5D,10,5,3,0.2084,van der Marck 1998
+d-Kagome-6D,12,6,3,0.1677,van der Marck 1998
+hc-1;2 (honeycomb ext.),9,2,3,0.363,Malarz 2024
+hc-1;3 (honeycomb ext.),6,2,6,0.4132,Malarz 2024
+hc-2;3 (honeycomb ext.),9,2,3,0.3139,Malarz 2024
+hc-1;2;3 (honeycomb ext.),12,2,3,0.303,Malarz 2024
+hc-1;4 (honeycomb ext.),9,2,4,0.2704,Malarz 2024
+hc-2;4 (honeycomb ext.),12,2,3,0.2374,Malarz 2024
+hc-3;4 (honeycomb ext.),9,2,4,0.2556,Malarz 2024
+hc-1;2;4 (honeycomb ext.),15,2,3,0.2278,Malarz 2024
+hc-1;3;4 (honeycomb ext.),12,2,4,0.2364,Malarz 2024
+hc-2;3;4 (honeycomb ext.),15,2,3,0.2161,Malarz 2024
+hc-1;2;3;4 (honeycomb ext.),18,2,3,0.2113,Malarz 2024
+hc-1;5 (honeycomb ext.),9,2,4,0.2654,Malarz 2024
+hc-2;5 (honeycomb ext.),12,2,3,0.2903,Malarz 2024
+hc-3;5 (honeycomb ext.),9,2,4,0.256,Malarz 2024
+hc-4;5 (honeycomb ext.),12,2,4,0.2014,Malarz 2024
+hc-1;2;5 (honeycomb ext.),15,2,3,0.2147,Malarz 2024
+hc-1;3;5 (honeycomb ext.),12,2,4,0.229,Malarz 2024
+hc-1;4;5 (honeycomb ext.),15,2,3,0.1913,Malarz 2024
+hc-2;3;5 (honeycomb ext.),15,2,3,0.2043,Malarz 2024
+hc-2;4;5 (honeycomb ext.),18,2,3,0.1752,Malarz 2024
+hc-3;4;5 (honeycomb ext.),15,2,3,0.1863,Malarz 2024
+hc-1;2;3;5 (honeycomb ext.),18,2,3,0.1973,Malarz 2024
+"sq-1,2,3,4,5,6",28,2,3,0.14326,Malarz2023
+"sq-2,3,4,5,6",24,2,3,0.14575,Malarz2023
+"sq-1,3,4,5,6",24,2,4,0.14801,Malarz2023
+"sq-1,2,4,5,6",24,2,3,0.15223,Malarz2023
+"sq-1,2,3,5,6",20,2,3,0.16661,Malarz2023
+"sq-1,2,3,4,6",24,2,3,0.16134,Malarz2023
+"sq-3,4,5,6",20,2,4,0.15221,Malarz2023
+"sq-2,4,5,6",20,2,3,0.15844,Malarz2023
+"sq-2,3,5,6",16,2,3,0.17601,Malarz2023
+"sq-2,3,4,6",20,2,3,0.16529,Malarz2023
+"sq-1,4,5,6",20,2,4,0.15815,Malarz2023
+"sq-1,3,5,6",16,2,4,0.18007,Malarz2023
+"sq-1,3,4,6",20,2,4,0.16675,Malarz2023
+"sq-1,2,5,6",16,2,3,0.18216,Malarz2023
+"sq-1,2,4,6",20,2,3,0.17409,Malarz2023
+"sq-1,2,3,6",16,2,3,0.20134,Malarz2023
+"sq-4,5,6",16,2,4,0.16819,Malarz2023
+"sq-3,5,6",12,2,4,0.19867,Malarz2023
+"sq-3,4,6",16,2,4,0.17288,Malarz2023
+"sq-2,5,6",12,2,3,0.20036,Malarz2023
+"sq-2,4,6",16,2,3,0.18454,Malarz2023
+"sq-2,3,6",12,2,3,0.21503,Malarz2023
+"sq-1,5,6",12,2,4,0.19936,Malarz2023
+"sq-1,4,6",16,2,4,0.18143,Malarz2023
+"sq-1,3,6",12,2,4,0.22577,Malarz2023
+"sq-1,2,6",12,2,3,0.23076,Malarz2023
+"sq-5,6",8,2,4,0.24422,Malarz2023
+"sq-4,6",12,2,4,0.19799,Malarz2023
+"sq-3,6",8,2,4,0.25673,Malarz2023
+"sq-2,6",8,2,3,0.266,Malarz2023
+"sq-1,6",8,2,4,0.27309,Malarz2023

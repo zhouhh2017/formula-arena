@@ -1,0 +1,51 @@
+﻿Monte Carlo Extension Results - Detailed
+============================================================
+
+Lattice: hypercubic_4d
+  Type: hypercubic
+  z=8, d=4, g=4
+  p_c = 0.193426 ± 0.001371
+  Finite-size scaling data:
+    L=10: p_c = 0.201146
+    L=14: p_c = 0.198049
+    L=18: p_c = 0.195440
+
+Lattice: sc3d_zone12
+  Type: sc_zone12
+  z=18, d=3, g=3
+  p_c = 0.137069 ± 0.004755
+  Finite-size scaling data:
+    L=8: p_c = 0.138925
+    L=10: p_c = 0.140000
+    L=14: p_c = 0.137465
+
+Lattice: hypercubic_5d
+  Type: hypercubic
+  z=10, d=5, g=4
+  p_c = 0.147255 ± 0.000971
+  Finite-size scaling data:
+    L=6: p_c = 0.141967
+    L=8: p_c = 0.143871
+    L=10: p_c = 0.145549
+
+Lattice: hypercubic_6d
+  Type: hypercubic
+  z=12, d=6, g=4
+  p_c = 0.111859 ± 0.002146
+  Finite-size scaling data:
+    L=5: p_c = 0.103559
+    L=6: p_c = 0.106567
+    L=7: p_c = 0.107463
+
+Lattice: PG2_4_incidence
+  Type: projective_plane
+  z=5, d=None, g=6
+  p_c = 0.251172 ± 0.005000
+  Graph size: 42 vertices
+
+Lattice: PG2_5_incidence
+  Type: projective_plane
+  z=6, d=None, g=6
+  p_c = 0.208203 ± 0.005000
+  Graph size: 62 vertices
+

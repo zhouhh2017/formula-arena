@@ -1,0 +1,325 @@
+{
+  "problem_title": "渗流阈值 p_c 与晶格几何参数的关系",
+  "problem_id": "percolation_pc",
+  "domain": "percolation",
+  "n_samples": 56,
+  "feature_vars": [
+    "z",
+    "d",
+    "z_inv",
+    "d_inv",
+    "zd",
+    "z_minus_1"
+  ],
+  "target_var": "pc",
+  "best_formula": "(z_inv + ((1.0000 / sin(0.5000)) / zd))",
+  "best_error": 0.050201662390050625,
+  "total_time_ms": 2405,
+  "summary": "扫地僧在 5 轮中发现最佳公式: (z_inv + ((1.0000 / sin(0.5000)) / zd)) (RMSE=0.0502, R²=0.9194)",
+  "rounds": [
+    {
+      "round": 1,
+      "hypotheses_count": 8,
+      "sr_results": [
+        {
+          "method": "遗传规划 (Genetic Programming)",
+          "formula": "((exp(((0.5000 + d_inv) / log(zd))) + (d / zd)) / sin((log(1.0000) / sin(0.5000))))",
+          "rmse": 0.0,
+          "mae": 14340204014.71098,
+          "r2": -6.713138143926544e+21,
+          "complexity": 18,
+          "iterations": 60,
+          "duration_ms": 631,
+          "success": true,
+          "notes": "种群40, 进化60代"
+        },
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "0.222149 + 0.287956 * z + (-9.888600) * z_inv + 2.573865 * d_inv + (-0.683217) * zd + 0.065801 * z_minus_1 + 0.209715 * z^2 + (-0.683212) * z*d + 0.222149 * z*z_inv + 1.327613 * z*d_inv + (-0.078479) * z*z_minus_1 + 0.026200 * d^2 + 0.561878 * d*z_inv + 0.222149 * d*d_inv + 1.351168 * d*z_minus_1 + (-4.149259) * z_inv^2 + 1.231846 * z_inv*d_inv + 10.110750 * z_inv*z_minus_1 + (-4.297052) * d_inv^2 + 0.287943 * d_inv*zd + (-1.246254) * d_inv*z_minus_1 + (-0.144040) * z_minus_1^2 + (-5.226060) * sqrt(abs(z)) + (-2.074092) * log(abs(z)) + (-9.888600) * 1/z + 4.028937 * sqrt(abs(d)) + 0.780495 * log(abs(d)) + 2.573865 * 1/d + (-3.919467) * sqrt(abs(z_inv)) + 2.074091 * log(abs(z_inv)) + 0.287938 * 1/z_inv + 1.759239 * sqrt(abs(d_inv)) + (-0.780494) * log(abs(d_inv)) + 0.756687 * sqrt(abs(zd)) + (-1.293602) * log(abs(zd)) + 1.231846 * 1/zd + (-2.875992) * sqrt(abs(z_minus_1)) + 3.601157 * log(abs(z_minus_1)) + 12.164003 * 1/z_minus_1",
+          "rmse": 0.2410330528507476,
+          "mae": 0.23829540914416553,
+          "r2": -0.8586149993864027,
+          "complexity": 234,
+          "iterations": 12,
+          "duration_ms": 5,
+          "success": true,
+          "notes": "候选库46项, 选中39项"
+        },
+        {
+          "method": "模板匹配 (Template Matching)",
+          "formula": "0.750000 * z + 0.500000",
+          "rmse": 0.0,
+          "mae": 6.904563642857143,
+          "r2": -1978.5788446037795,
+          "complexity": 5,
+          "iterations": 24,
+          "duration_ms": 49,
+          "success": true,
+          "notes": "尝试24个模板, 最佳: \"a * z + b\""
+        },
+        {
+          "method": "物理引导搜索 (Physics-Informed)",
+          "formula": "0.750000 * (z - 0.500000)^0.5000",
+          "rmse": 0.0,
+          "mae": 1.836491802175924,
+          "r2": -126.69451346414533,
+          "complexity": 7,
+          "iterations": 12,
+          "duration_ms": 22,
+          "success": true,
+          "notes": "测试12个物理启发公式"
+        }
+      ],
+      "best_rmse": 0.2410330528507476,
+      "best_r2": -0.8586149993864027
+    },
+    {
+      "round": 2,
+      "hypotheses_count": 8,
+      "sr_results": [
+        {
+          "method": "遗传规划 (Genetic Programming)",
+          "formula": "(((0.5000 * d_inv) + 1.0000) * (((0.5000 * d_inv) + 1.0000) / z_minus_1))",
+          "rmse": 0.05647531294838665,
+          "mae": 0.0409339752887436,
+          "r2": 0.8979639760347912,
+          "complexity": 13,
+          "iterations": 60,
+          "duration_ms": 320,
+          "success": true,
+          "notes": "种群40, 进化60代"
+        },
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "0.222149 + 0.287956 * z + (-9.888600) * z_inv + 2.573865 * d_inv + (-0.683217) * zd + 0.065801 * z_minus_1 + 0.209715 * z^2 + (-0.683212) * z*d + 0.222149 * z*z_inv + 1.327613 * z*d_inv + (-0.078479) * z*z_minus_1 + 0.026200 * d^2 + 0.561878 * d*z_inv + 0.222149 * d*d_inv + 1.351168 * d*z_minus_1 + (-4.149259) * z_inv^2 + 1.231846 * z_inv*d_inv + 10.110750 * z_inv*z_minus_1 + (-4.297052) * d_inv^2 + 0.287943 * d_inv*zd + (-1.246254) * d_inv*z_minus_1 + (-0.144040) * z_minus_1^2 + (-5.226060) * sqrt(abs(z)) + (-2.074092) * log(abs(z)) + (-9.888600) * 1/z + 4.028937 * sqrt(abs(d)) + 0.780495 * log(abs(d)) + 2.573865 * 1/d + (-3.919467) * sqrt(abs(z_inv)) + 2.074091 * log(abs(z_inv)) + 0.287938 * 1/z_inv + 1.759239 * sqrt(abs(d_inv)) + (-0.780494) * log(abs(d_inv)) + 0.756687 * sqrt(abs(zd)) + (-1.293602) * log(abs(zd)) + 1.231846 * 1/zd + (-2.875992) * sqrt(abs(z_minus_1)) + 3.601157 * log(abs(z_minus_1)) + 12.164003 * 1/z_minus_1",
+          "rmse": 0.2410330528507476,
+          "mae": 0.23829540914416553,
+          "r2": -0.8586149993864027,
+          "complexity": 234,
+          "iterations": 12,
+          "duration_ms": 5,
+          "success": true,
+          "notes": "候选库46项, 选中39项"
+        },
+        {
+          "method": "模板匹配 (Template Matching)",
+          "formula": "0.750000 * z + 0.500000",
+          "rmse": 0.0,
+          "mae": 6.904563642857143,
+          "r2": -1978.5788446037795,
+          "complexity": 5,
+          "iterations": 24,
+          "duration_ms": 49,
+          "success": true,
+          "notes": "尝试24个模板, 最佳: \"a * z + b\""
+        },
+        {
+          "method": "物理引导搜索 (Physics-Informed)",
+          "formula": "0.750000 * (z - 0.500000)^0.5000",
+          "rmse": 0.0,
+          "mae": 1.836491802175924,
+          "r2": -126.69451346414533,
+          "complexity": 7,
+          "iterations": 12,
+          "duration_ms": 22,
+          "success": true,
+          "notes": "测试12个物理启发公式"
+        }
+      ],
+      "best_rmse": 0.05647531294838665,
+      "best_r2": 0.8979639760347912
+    },
+    {
+      "round": 3,
+      "hypotheses_count": 8,
+      "sr_results": [
+        {
+          "method": "遗传规划 (Genetic Programming)",
+          "formula": "(z_inv + ((1.0000 / sin(0.5000)) / zd))",
+          "rmse": 0.050201662390050625,
+          "mae": 0.036626132596868186,
+          "r2": 0.9193744979043452,
+          "complexity": 8,
+          "iterations": 60,
+          "duration_ms": 318,
+          "success": true,
+          "notes": "种群40, 进化60代"
+        },
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "0.222149 + 0.287956 * z + (-9.888600) * z_inv + 2.573865 * d_inv + (-0.683217) * zd + 0.065801 * z_minus_1 + 0.209715 * z^2 + (-0.683212) * z*d + 0.222149 * z*z_inv + 1.327613 * z*d_inv + (-0.078479) * z*z_minus_1 + 0.026200 * d^2 + 0.561878 * d*z_inv + 0.222149 * d*d_inv + 1.351168 * d*z_minus_1 + (-4.149259) * z_inv^2 + 1.231846 * z_inv*d_inv + 10.110750 * z_inv*z_minus_1 + (-4.297052) * d_inv^2 + 0.287943 * d_inv*zd + (-1.246254) * d_inv*z_minus_1 + (-0.144040) * z_minus_1^2 + (-5.226060) * sqrt(abs(z)) + (-2.074092) * log(abs(z)) + (-9.888600) * 1/z + 4.028937 * sqrt(abs(d)) + 0.780495 * log(abs(d)) + 2.573865 * 1/d + (-3.919467) * sqrt(abs(z_inv)) + 2.074091 * log(abs(z_inv)) + 0.287938 * 1/z_inv + 1.759239 * sqrt(abs(d_inv)) + (-0.780494) * log(abs(d_inv)) + 0.756687 * sqrt(abs(zd)) + (-1.293602) * log(abs(zd)) + 1.231846 * 1/zd + (-2.875992) * sqrt(abs(z_minus_1)) + 3.601157 * log(abs(z_minus_1)) + 12.164003 * 1/z_minus_1",
+          "rmse": 0.2410330528507476,
+          "mae": 0.23829540914416553,
+          "r2": -0.8586149993864027,
+          "complexity": 234,
+          "iterations": 12,
+          "duration_ms": 5,
+          "success": true,
+          "notes": "候选库46项, 选中39项"
+        },
+        {
+          "method": "模板匹配 (Template Matching)",
+          "formula": "0.750000 * z + 0.500000",
+          "rmse": 0.0,
+          "mae": 6.904563642857143,
+          "r2": -1978.5788446037795,
+          "complexity": 5,
+          "iterations": 24,
+          "duration_ms": 49,
+          "success": true,
+          "notes": "尝试24个模板, 最佳: \"a * z + b\""
+        },
+        {
+          "method": "物理引导搜索 (Physics-Informed)",
+          "formula": "0.750000 * (z - 0.500000)^0.5000",
+          "rmse": 0.0,
+          "mae": 1.836491802175924,
+          "r2": -126.69451346414533,
+          "complexity": 7,
+          "iterations": 12,
+          "duration_ms": 22,
+          "success": true,
+          "notes": "测试12个物理启发公式"
+        }
+      ],
+      "best_rmse": 0.050201662390050625,
+      "best_r2": 0.9193744979043452
+    },
+    {
+      "round": 4,
+      "hypotheses_count": 8,
+      "sr_results": [
+        {
+          "method": "遗传规划 (Genetic Programming)",
+          "formula": "((log(2.3144) * sqrt((1.0000 + 1.0000))) / z_minus_1)",
+          "rmse": 0.0754331367599377,
+          "mae": 0.04687478255713717,
+          "r2": 0.8179626227033525,
+          "complexity": 9,
+          "iterations": 60,
+          "duration_ms": 300,
+          "success": true,
+          "notes": "种群40, 进化60代"
+        },
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "0.222149 + 0.287956 * z + (-9.888600) * z_inv + 2.573865 * d_inv + (-0.683217) * zd + 0.065801 * z_minus_1 + 0.209715 * z^2 + (-0.683212) * z*d + 0.222149 * z*z_inv + 1.327613 * z*d_inv + (-0.078479) * z*z_minus_1 + 0.026200 * d^2 + 0.561878 * d*z_inv + 0.222149 * d*d_inv + 1.351168 * d*z_minus_1 + (-4.149259) * z_inv^2 + 1.231846 * z_inv*d_inv + 10.110750 * z_inv*z_minus_1 + (-4.297052) * d_inv^2 + 0.287943 * d_inv*zd + (-1.246254) * d_inv*z_minus_1 + (-0.144040) * z_minus_1^2 + (-5.226060) * sqrt(abs(z)) + (-2.074092) * log(abs(z)) + (-9.888600) * 1/z + 4.028937 * sqrt(abs(d)) + 0.780495 * log(abs(d)) + 2.573865 * 1/d + (-3.919467) * sqrt(abs(z_inv)) + 2.074091 * log(abs(z_inv)) + 0.287938 * 1/z_inv + 1.759239 * sqrt(abs(d_inv)) + (-0.780494) * log(abs(d_inv)) + 0.756687 * sqrt(abs(zd)) + (-1.293602) * log(abs(zd)) + 1.231846 * 1/zd + (-2.875992) * sqrt(abs(z_minus_1)) + 3.601157 * log(abs(z_minus_1)) + 12.164003 * 1/z_minus_1",
+          "rmse": 0.2410330528507476,
+          "mae": 0.23829540914416553,
+          "r2": -0.8586149993864027,
+          "complexity": 234,
+          "iterations": 12,
+          "duration_ms": 5,
+          "success": true,
+          "notes": "候选库46项, 选中39项"
+        },
+        {
+          "method": "模板匹配 (Template Matching)",
+          "formula": "0.750000 * z + 0.500000",
+          "rmse": 0.0,
+          "mae": 6.904563642857143,
+          "r2": -1978.5788446037795,
+          "complexity": 5,
+          "iterations": 24,
+          "duration_ms": 49,
+          "success": true,
+          "notes": "尝试24个模板, 最佳: \"a * z + b\""
+        },
+        {
+          "method": "物理引导搜索 (Physics-Informed)",
+          "formula": "0.750000 * (z - 0.500000)^0.5000",
+          "rmse": 0.0,
+          "mae": 1.836491802175924,
+          "r2": -126.69451346414533,
+          "complexity": 7,
+          "iterations": 12,
+          "duration_ms": 22,
+          "success": true,
+          "notes": "测试12个物理启发公式"
+        }
+      ],
+      "best_rmse": 0.0754331367599377,
+      "best_r2": 0.8179626227033525
+    },
+    {
+      "round": 5,
+      "hypotheses_count": 8,
+      "sr_results": [
+        {
+          "method": "遗传规划 (Genetic Programming)",
+          "formula": "((zd * z_inv) / (z - z))",
+          "rmse": 0.0,
+          "mae": 48749999999.761696,
+          "r2": -9.077622221583715e+22,
+          "complexity": 7,
+          "iterations": 60,
+          "duration_ms": 432,
+          "success": true,
+          "notes": "种群40, 进化60代"
+        },
+        {
+          "method": "SINDy 稀疏回归",
+          "formula": "0.222149 + 0.287956 * z + (-9.888600) * z_inv + 2.573865 * d_inv + (-0.683217) * zd + 0.065801 * z_minus_1 + 0.209715 * z^2 + (-0.683212) * z*d + 0.222149 * z*z_inv + 1.327613 * z*d_inv + (-0.078479) * z*z_minus_1 + 0.026200 * d^2 + 0.561878 * d*z_inv + 0.222149 * d*d_inv + 1.351168 * d*z_minus_1 + (-4.149259) * z_inv^2 + 1.231846 * z_inv*d_inv + 10.110750 * z_inv*z_minus_1 + (-4.297052) * d_inv^2 + 0.287943 * d_inv*zd + (-1.246254) * d_inv*z_minus_1 + (-0.144040) * z_minus_1^2 + (-5.226060) * sqrt(abs(z)) + (-2.074092) * log(abs(z)) + (-9.888600) * 1/z + 4.028937 * sqrt(abs(d)) + 0.780495 * log(abs(d)) + 2.573865 * 1/d + (-3.919467) * sqrt(abs(z_inv)) + 2.074091 * log(abs(z_inv)) + 0.287938 * 1/z_inv + 1.759239 * sqrt(abs(d_inv)) + (-0.780494) * log(abs(d_inv)) + 0.756687 * sqrt(abs(zd)) + (-1.293602) * log(abs(zd)) + 1.231846 * 1/zd + (-2.875992) * sqrt(abs(z_minus_1)) + 3.601157 * log(abs(z_minus_1)) + 12.164003 * 1/z_minus_1",
+          "rmse": 0.2410330528507476,
+          "mae": 0.23829540914416553,
+          "r2": -0.8586149993864027,
+          "complexity": 234,
+          "iterations": 12,
+          "duration_ms": 5,
+          "success": true,
+          "notes": "候选库46项, 选中39项"
+        },
+        {
+          "method": "模板匹配 (Template Matching)",
+          "formula": "0.750000 * z + 0.500000",
+          "rmse": 0.0,
+          "mae": 6.904563642857143,
+          "r2": -1978.5788446037795,
+          "complexity": 5,
+          "iterations": 24,
+          "duration_ms": 48,
+          "success": true,
+          "notes": "尝试24个模板, 最佳: \"a * z + b\""
+        },
+        {
+          "method": "物理引导搜索 (Physics-Informed)",
+          "formula": "0.750000 * (z - 0.500000)^0.5000",
+          "rmse": 0.0,
+          "mae": 1.836491802175924,
+          "r2": -126.69451346414533,
+          "complexity": 7,
+          "iterations": 12,
+          "duration_ms": 22,
+          "success": true,
+          "notes": "测试12个物理启发公式"
+        }
+      ],
+      "best_rmse": 0.2410330528507476,
+      "best_r2": -0.8586149993864027
+    }
+  ],
+  "best_report": {
+    "formula": "(z_inv + ((1.0000 / sin(0.5000)) / zd))",
+    "rmse": 0.050201662390050625,
+    "r2": 0.9193744979043452,
+    "interpretability": 78.0,
+    "overall_score": 87.75621485330416,
+    "insights": [
+      "公式复杂度为 8 个节点, 可解释性评分 78.0/100。",
+      "R² = 0.9194, 模型能解释 91.9% 的方差, 拟合质量优秀。",
+      "当 d 取值较小时 (高误差组均值 3.25 vs 低误差组 6.71, 差异 -1.61σ), 模型误差显著增大。",
+      "当 z_inv 取值较大时 (高误差组均值 0.19 vs 低误差组 0.13, 差异 0.64σ), 模型误差显著增大。",
+      "当 d_inv 取值较大时 (高误差组均值 0.40 vs 低误差组 0.16, 差异 1.74σ), 模型误差显著增大。",
+      "当 zd 取值较小时 (高误差组均值 19.94 vs 低误差组 68.43, 差异 -1.41σ), 模型误差显著增大。"
+    ],
+    "recommendations": [
+      "针对高误差样本的特征区间, 考虑分段拟合或添加交互项。"
+    ],
+    "error_patterns": [
+      "当 d 取值较小时 (高误差组均值 3.25 vs 低误差组 6.71, 差异 -1.61σ), 模型误差显著增大。",
+      "当 z_inv 取值较大时 (高误差组均值 0.19 vs 低误差组 0.13, 差异 0.64σ), 模型误差显著增大。",
+      "当 d_inv 取值较大时 (高误差组均值 0.40 vs 低误差组 0.16, 差异 1.74σ), 模型误差显著增大。",
+      "当 zd 取值较小时 (高误差组均值 19.94 vs 低误差组 68.43, 差异 -1.41σ), 模型误差显著增大。"
+    ]
+  }
+}

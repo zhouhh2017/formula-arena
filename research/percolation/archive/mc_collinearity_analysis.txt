@@ -1,0 +1,14 @@
+﻿Z-G Collinearity Analysis
+========================================
+
+Before (Malarz 2023 only):
+  N = 31
+  r(z,g) = -0.3135
+  p-value = 8.59e-02
+
+After (combined with MC data):
+  N = 37
+  r(z,g) = -0.5405
+  p-value = 5.53e-04
+
+Improvement: Δ|r| = -0.2270

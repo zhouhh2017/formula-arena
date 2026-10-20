@@ -1,0 +1,23 @@
+﻿FCC Packing Fraction Analysis Summary
+============================================================
+
+corr(p_c, phi) = -0.2196
+corr(z, phi) = 0.6613
+partial_corr(p_c, phi | z) = 0.3527
+
+Baseline: R²=0.988021, FCC_err=54.9%
+Best phi model: F6: ×((1-φ)/φ)^δ
+  R²=0.989476, FCC_err=55.7%
+  params=[ 2.55417613  0.94827063  0.64385251  1.48461669 -0.03478492]
+
+All models:
+  F0: baseline (no φ)                      R²=0.988021 FCC_err=54.9% AIC=-136.7
+  F1: ×φ^β                                 R²=0.988586 FCC_err=55.3% AIC=-135.6
+  F2: ×(1+C(φ-0.52))                       R²=0.988977 FCC_err=56.1% AIC=-136.3
+  F3: ×exp(λφ)                             R²=0.989016 FCC_err=56.2% AIC=-136.4
+  F4: (zd)^{-α}(1+B/g)φ^β                  R²=0.984911 FCC_err=54.9% AIC=-132.3
+  F5: ×(1+δz(φ-0.52))                      R²=0.988244 FCC_err=58.0% AIC=-135.1
+  F6: ×((1-φ)/φ)^δ                         R²=0.989476 FCC_err=55.7% AIC=-137.2
+
+Optimal beta = 0.102
+Excl FCC: F0 R²=0.993667, F1 R²=0.994392

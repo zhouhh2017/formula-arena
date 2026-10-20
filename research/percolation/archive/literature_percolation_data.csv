@@ -1,0 +1,78 @@
+name,z,d,g,pc,uncertainty,source,note
+triangular,6,2,3,0.500000000,,Sykes & Essam 1964,exact; self-matching lattice
+honeycomb,3,2,6,0.697043,0.000003,"Suding & Ziff 1998; Malarz 2024",MC hull-gradient; best value 0.6970402(1)
+square,4,2,4,0.592746,0.000001,"Ziff & Saperial 1986; Mertens & Moore 2012",MC; very high precision
+kagome,4,2,3,0.6527036,,Sykes & Essam 1964,exact; =1-2*sin(pi/18)
+(3^4;6),5,2,3,0.579498,0.000005,Suding & Ziff 1998,MC hull-gradient
+(3^3;4^2),5,2,3,0.550213,0.000005,Suding & Ziff 1998,MC hull-gradient
+(3;4;6;4),4,2,3,0.621819,0.000005,Suding & Ziff 1998,MC hull-gradient
+(4;6;12),3,2,3,0.747806,0.000005,Suding & Ziff 1998,MC hull-gradient
+(4;8^2),3,2,4,0.729724,0.000005,Suding & Ziff 1998,MC hull-gradient
+(3;12^2),3,2,3,0.807904,0.000005,Suding & Ziff 1998,MC hull-gradient
+diamond,4,3,6,0.4285,0.0010,"Galam & Mauger 1996; Lorenz & Ziff 1998",MC estimate
+simple cubic (sc),6,3,4,0.31161,0.00001,"Lorenz & Ziff 1998; Mertens & Moore 2018",MC; most precise: 0.3116077(4)
+bcc,8,3,4,0.24597,0.00002,"Lorenz & Ziff 1998; Galam & Mauger 1996",MC
+fcc,12,3,3,0.19923,0.00002,"Lorenz & Ziff 1998; Galam & Mauger 1996",MC
+hcp,12,3,3,0.1992555,0.0000010,"Lorenz May & Ziff 1999",MC; very close to fcc value
+sc-1;2,18,3,3,0.1373045,0.0000005,"Xun et al. 2021; Malarz & Galam 2004",MC extended range
+sc-1;2;3,26,3,3,0.0976444,0.0000006,"Xun et al. 2021",MC extended range
+sc-1;2;3;4,32,3,3,0.0801171,0.0000009,"Xun et al. 2021",MC extended range
+sc-1;...;5,56,3,3,0.0461815,0.0000005,Xun et al. 2021,MC extended range
+sc-1;...;6,80,3,3,0.0337049,0.0000009,Xun et al. 2021,MC extended range
+sc-1;...;7,92,3,3,0.0290800,0.0000010,Xun et al. 2021,MC extended range
+sc-1;...;8,122,3,3,0.0218686,0.0000006,Xun et al. 2021,MC extended range
+sc-1;...;9,146,3,3,0.0184060,0.0000010,Xun et al. 2021,MC extended range
+bcc-1;2,14,3,3,0.1759432,0.0000008,Xun et al. 2021,MC extended range
+bcc-1;2;3,26,3,3,0.0959084,0.0000006,Xun et al. 2021,MC extended range
+fcc-1;2,18,3,3,0.1361408,0.0000008,Xun et al. 2021,MC extended range
+fcc-1;2;3,42,3,3,0.0618842,0.0000008,Xun et al. 2021,MC extended range
+4D hypercubic (sc4),8,4,4,0.19688561,0.00000003,Mertens & Moore 2018,invasion percolation MC
+5D hypercubic (sc5),10,5,4,0.14079633,0.00000004,Mertens & Moore 2018,invasion percolation MC
+6D hypercubic (sc6),12,6,4,0.109016661,0.000000008,Mertens & Moore 2018,invasion percolation MC
+7D hypercubic (sc7),14,7,4,0.088951121,0.000000001,Mertens & Moore 2018,invasion percolation MC
+8D hypercubic (sc8),16,8,4,0.075210128,0.000000001,Mertens & Moore 2018,invasion percolation MC
+9D hypercubic (sc9),18,9,4,0.0652095348,0.0000000006,Mertens & Moore 2018,invasion percolation MC
+10D hypercubic (sc10),20,10,4,0.0575929488,0.0000000004,Mertens & Moore 2018,invasion percolation MC
+11D hypercubic (sc11),22,11,4,0.0515896843,0.0000000002,Mertens & Moore 2018,invasion percolation MC
+12D hypercubic (sc12),24,12,4,0.0467309755,0.0000000001,Mertens & Moore 2018,invasion percolation MC
+13D hypercubic (sc13),26,13,4,0.04271507960,0.00000000010,Mertens & Moore 2018,invasion percolation MC
+sc(4)-1;2,32,4,4,0.0617731,0.0000019,Zhao et al. 2021,4D extended range MC
+sc(4)-1;2;3,64,4,4,0.0319407,0.0000013,Zhao et al. 2021,4D extended range MC
+sc(4)-1;2;3;4,88,4,4,0.0231538,0.0000012,Zhao et al. 2021,4D extended range MC
+sc(4)-1;...;5,136,4,4,0.0147918,0.0000012,Zhao et al. 2021,4D extended range MC
+sc(4)-1;...;6,232,4,4,0.0088400,0.0000010,Zhao et al. 2021,4D extended range MC
+sc(4)-1;...;7,296,4,4,0.0070006,0.0000006,Zhao et al. 2021,4D extended range MC
+sc(4)-1;...;8,320,4,4,0.0064681,0.0000009,Zhao et al. 2021,4D extended range MC
+sc(4)-1;...;9,424,4,4,0.0048301,0.0000009,Zhao et al. 2021,4D extended range MC
+sc(5)-1;2,50,5,4,0.033794,0.000004,Xun et al. 2023,5D extended range MC
+sc(5)-1;2;3,130,5,4,0.013190,0.000002,Xun et al. 2023,5D extended range MC
+sc(5)-1;2;3;4,220,5,4,0.007850,0.000001,Xun et al. 2023,5D extended range MC
+sc(5)-1;...;5,332,5,4,0.0051575,0.0000005,Xun et al. 2023,5D extended range MC
+sc(5)-1;...;6,572,5,4,0.0029805,0.0000005,Xun et al. 2023,5D extended range MC
+sc(5)-1;...;7,892,5,4,0.001934,0.000001,Xun et al. 2023,5D extended range MC
+d-Kagome-3D,6,3,3,0.3895,0.0002,van der Marck 1998,3D Kagome generalization MC
+d-Kagome-4D,8,4,3,0.2715,0.0003,van der Marck 1998,4D Kagome generalization MC
+d-Kagome-5D,10,5,3,0.2084,0.0004,van der Marck 1998,5D Kagome generalization MC
+d-Kagome-6D,12,6,3,0.1677,0.0007,van der Marck 1998,6D Kagome generalization MC
+hc-1;2 (honeycomb ext.),9,2,3,0.3630,0.0005,Malarz 2024,2D honeycomb 2nd zone MC
+hc-1;3 (honeycomb ext.),6,2,6,0.4132,0.0005,Malarz 2024,2D honeycomb 3rd zone MC
+hc-2;3 (honeycomb ext.),9,2,3,0.3139,0.0005,Malarz 2024,2D honeycomb 2+3 zones MC
+hc-1;2;3 (honeycomb ext.),12,2,3,0.3030,0.0005,Malarz 2024,2D honeycomb 1+2+3 zones MC
+hc-1;4 (honeycomb ext.),9,2,4,0.2704,0.0005,Malarz 2024,2D honeycomb 4th zone MC
+hc-2;4 (honeycomb ext.),12,2,3,0.2374,0.0005,Malarz 2024,2D honeycomb 2+4 zones MC
+hc-3;4 (honeycomb ext.),9,2,4,0.2556,0.0005,Malarz 2024,2D honeycomb 3+4 zones MC
+hc-1;2;4 (honeycomb ext.),15,2,3,0.2278,0.0005,Malarz 2024,2D honeycomb 1+2+4 zones MC
+hc-1;3;4 (honeycomb ext.),12,2,4,0.2364,0.0005,Malarz 2024,2D honeycomb 1+3+4 zones MC
+hc-2;3;4 (honeycomb ext.),15,2,3,0.2161,0.0005,Malarz 2024,2D honeycomb 2+3+4 zones MC
+hc-1;2;3;4 (honeycomb ext.),18,2,3,0.2113,0.0005,Malarz 2024,2D honeycomb 1+2+3+4 zones MC
+hc-1;5 (honeycomb ext.),9,2,4,0.2654,0.0005,Malarz 2024,2D honeycomb 5th zone MC
+hc-2;5 (honeycomb ext.),12,2,3,0.2903,0.0005,Malarz 2024,2D honeycomb 2+5 zones MC
+hc-3;5 (honeycomb ext.),9,2,4,0.2560,0.0005,Malarz 2024,2D honeycomb 3+5 zones MC
+hc-4;5 (honeycomb ext.),12,2,4,0.2014,0.0005,Malarz 2024,2D honeycomb 4+5 zones MC
+hc-1;2;5 (honeycomb ext.),15,2,3,0.2147,0.0005,Malarz 2024,2D honeycomb 1+2+5 zones MC
+hc-1;3;5 (honeycomb ext.),12,2,4,0.2290,0.0005,Malarz 2024,2D honeycomb 1+3+5 zones MC
+hc-1;4;5 (honeycomb ext.),15,2,3,0.1913,0.0005,Malarz 2024,2D honeycomb 1+4+5 zones MC
+hc-2;3;5 (honeycomb ext.),15,2,3,0.2043,0.0005,Malarz 2024,2D honeycomb 2+3+5 zones MC
+hc-2;4;5 (honeycomb ext.),18,2,3,0.1752,0.0005,Malarz 2024,2D honeycomb 2+4+5 zones MC
+hc-3;4;5 (honeycomb ext.),15,2,3,0.1863,0.0005,Malarz 2024,2D honeycomb 3+4+5 zones MC
+hc-1;2;3;5 (honeycomb ext.),18,2,3,0.1973,0.0005,Malarz 2024,2D honeycomb 1+2+3+5 zones MC
