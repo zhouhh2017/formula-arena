@@ -55,24 +55,32 @@ function toolName(envName: string, fallback: string): string {
   return process.env[envName]?.trim() || fallback;
 }
 
+function textBlocks(content: unknown): string[] {
+  if (!Array.isArray(content)) return [];
+  return content
+    .filter(
+      (item): item is { type: 'text'; text: string } =>
+        typeof item === 'object' &&
+        item !== null &&
+        'type' in item &&
+        item.type === 'text' &&
+        'text' in item &&
+        typeof item.text === 'string',
+    )
+    .map((item) => item.text);
+}
+
 async function callMcpTool(name: string, args: Record<string, unknown>): Promise<unknown> {
   const client = await getMcpClient();
   const result = await client.callTool({ name, arguments: args });
   if (result.isError) {
-    const message = result.content
-      .filter((item) => item.type === 'text')
-      .map((item) => item.text)
-      .join('\n');
+    const message = textBlocks(result.content).join('\n');
     throw new Error(message || `MCP tool "${name}" failed`);
   }
 
   if (result.structuredContent) return result.structuredContent;
 
-  const text = result.content
-    .filter((item) => item.type === 'text')
-    .map((item) => item.text)
-    .join('\n')
-    .trim();
+  const text = textBlocks(result.content).join('\n').trim();
   if (!text) return null;
   try {
     return JSON.parse(text) as unknown;
