@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 """
 谱理论深度分析：计算谱隙 Δλ 并建立与 p_c 的映射
@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
   4. 探索谱隙标度的物理意义
   5. 可视化
 
-All outputs saved to: /home/scientist/project2106202985693622273/ResearchSpace/
+All outputs are saved beside this script.
 """
 
 import numpy as np
